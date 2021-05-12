@@ -1,0 +1,5 @@
+{
+    "serverAddress": "http://localhost:8000",
+    "statePathOnServer": "/api/state",
+    "dataListenerPort": 1900
+}
