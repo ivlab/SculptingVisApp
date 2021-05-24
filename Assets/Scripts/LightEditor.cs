@@ -1,17 +1,38 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using IVLab.Utilities;
 using IVLab.ABREngine;
+using Newtonsoft.Json.Linq;
 
 public class LightEditor : MonoBehaviour
 {
     public Light editingLight = null;
 
+    private int numLights = 0;
+    bool initDefaultLightYet = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        ABREngine.Instance.OnStateChanged += OnABRStateChanged;
+    }
+
+    void OnABRStateChanged(JObject newState)
+    {
+        if (!initDefaultLightYet)
+        {
+            GameObject lightParent = GameObject.Find("ABRLightParent");
+            if (lightParent == null || lightParent.transform.childCount == 0)
+            {
+                // Initialize a new light
+                NewLight(string.Format("Light {0}", numLights + 1));
+            }
+            SaveLights();
+            initDefaultLightYet = true;
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +44,8 @@ public class LightEditor : MonoBehaviour
         {
             return;
         }
+
+        numLights = 0;
 
         // Update light list from state
         Dropdown lightOptions = GetComponentInChildren<Dropdown>();
@@ -37,6 +60,7 @@ public class LightEditor : MonoBehaviour
                 options.Add(new Dropdown.OptionData {
                     text = light.gameObject.name,
                 });
+                numLights += 1;
             }
             options.Reverse();
             lightOptions.AddOptions(options);
@@ -56,6 +80,11 @@ public class LightEditor : MonoBehaviour
 
     public void NewLight(string name)
     {
+        if (name.Length == 0)
+        {
+            name = string.Format("Light {0}", numLights + 1);
+        }
+
         GameObject lightParent = GameObject.Find("ABRLightParent");
         if (lightParent == null)
         {
@@ -84,7 +113,7 @@ public class LightEditor : MonoBehaviour
 
     public void EditLight() {
         Dropdown lightOptions = GetComponentInChildren<Dropdown>();
-        InputField lightName = GetComponentInChildren<InputField>();
+        Text lightNameText = GetComponentsInChildren<Text>().Where((c) => c.gameObject.name == "LightNameText").First();
         Slider intensitySlider = GetComponentInChildren<Slider>();
 
         GameObject light = GameObject.Find(lightOptions.captionText.text);
@@ -94,7 +123,7 @@ public class LightEditor : MonoBehaviour
             return;
         }
 
-        lightName.text = lightOptions.captionText.text;
+        lightNameText.text = editingLight.name;
         intensitySlider.value = editingLight.intensity;
 
         // Disable the camera control
