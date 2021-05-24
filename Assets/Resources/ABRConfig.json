@@ -2,6 +2,6 @@
     "serverAddress": "http://localhost:8000",
     "statePathOnServer": "/api/state",
     "stateSubscriberPort": 8001,
-    "mediaPath": "../media",
+    "mediaPath": "./media",
     "dataListenerPort": 1900
 }
