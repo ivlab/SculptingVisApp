@@ -34,7 +34,7 @@ public class SVScreenshot : MonoBehaviour
         string finalPath = System.IO.Path.Combine(pathText.text, nameText.text);
         int width = int.Parse(widthText.text);
         int height = int.Parse(heightText.text);
-        screenshotCamera.SaveScreenshot(finalPath, width, height, transBg.isOn);
+        screenshotCamera.SaveScreenshotOnLateUpdate(finalPath, width, height, transBg.isOn);
         gameObject.SetActive(false);
     }
 }
