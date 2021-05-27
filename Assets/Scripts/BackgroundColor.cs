@@ -21,7 +21,11 @@ public class BackgroundColor : MonoBehaviour
         {
             string bgColorHtml = state["scene"]["backgroundColor"].ToString();
             Color bgColor = picker.Color;
-            if (!ColorUtility.TryParseHtmlString(bgColorHtml, out bgColor))
+            if (bgColorHtml != null)
+            {
+                bgColor = IVLab.Utilities.ColorUtilities.HexToColor(bgColorHtml);
+            }
+            else
             {
                 Debug.LogErrorFormat("Unable to parse color: {0}", bgColorHtml);
             }
