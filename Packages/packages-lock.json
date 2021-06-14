@@ -94,32 +94,25 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "b160105885f91c215877bf393846c3790c5b749c"
+      "hash": "a64ca13f2aee6f8176aa29c3e172659e7b0d2770"
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git#v2.3.0",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "edu.umn.cs.ivlab.newtonsoft.json": "git@github.umn.edu/ivlab-cs/NewtonsoftJson-UnityPackage.git#v12.0.3"
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "f7869b85c930848b4c9e9c15aa5be3b16c5300fe"
-    },
-    "edu.umn.cs.ivlab.newtonsoft.json": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/NewtonsoftJson-UnityPackage.git#v12.0.3",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0b76a48281e2f21f07bdf6cd0da1da6df107425d"
+      "hash": "ee92af7919578eace74838da1deaa205ae06682f"
     },
     "edu.umn.cs.ivlab.newtonsoft.json.schema": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git#v3.0.13",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "edu.umn.cs.ivlab.newtonsoft.json": "git@github.umn.edu/ivlab-cs/NewtonsoftJson-UnityPackage.git#12.0.3"
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "1513279bf10e7650451da747bdbd401eca4bf69c"
+      "hash": "2e9bfa529536cede118eb0f4c4f7afc25c39684f"
     },
     "edu.umn.cs.ivlab.objimport": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git#v2.0.2",
@@ -133,7 +126,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e2948802181952a609f028e99cbd08748243fbb0"
+      "hash": "f0e5c94d26b9f5294beb8ad12d9d403d62762028"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
