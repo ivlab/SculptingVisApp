@@ -12,7 +12,7 @@
     "edu.umn.cs.ivlab.jsondiffpatch": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
     "edu.umn.cs.ivlab.newtonsoft.json.schema": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
     "edu.umn.cs.ivlab.objimport": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git#v2.0.2",
-    "edu.umn.cs.ivlab.utilities": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git",
+    "edu.umn.cs.ivlab.utilities": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#v0.1.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
