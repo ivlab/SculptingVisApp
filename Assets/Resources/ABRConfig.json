@@ -1,6 +1,6 @@
 {
     "serverAddress": "http://localhost:8000",
     "statePathOnServer": "api/state",
-    "mediaPath": "C:/users/bridger/dev/SculptingVisAppBuild/media",
+    "mediaPath": "./media",
     "dataListenerPort": 1900
 }
