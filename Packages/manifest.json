@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "edu.umn.cs.ivlab.abrengine": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#cd5747c5073455bd16c00441519c757008236859",
-    "edu.umn.cs.ivlab.jsondiffpatch": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
-    "edu.umn.cs.ivlab.newtonsoft.json.schema": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
-    "edu.umn.cs.ivlab.objimport": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git#v2.0.2",
-    "edu.umn.cs.ivlab.utilities": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#dbc86cff3bcc1d4939ce4e84361e47f0a84cf8d9",
     "com.unity.collab-proxy": "1.5.7",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.8",
@@ -13,6 +8,11 @@
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
+    "edu.umn.cs.ivlab.abrengine": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#5ecf11da4d16f1af30e0aad90299efa42d91b279",
+    "edu.umn.cs.ivlab.jsondiffpatch": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
+    "edu.umn.cs.ivlab.newtonsoft.json.schema": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
+    "edu.umn.cs.ivlab.objimport": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git#v2.0.2",
+    "edu.umn.cs.ivlab.utilities": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#66d99e7cd811c67f68677c6da84c55c179a14b25",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

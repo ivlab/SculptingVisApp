@@ -33,7 +33,10 @@ public class BackgroundColor : MonoBehaviour
             }
             picker.Color = bgColor;
         }
-        catch (Exception e) { }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     public void SaveBackground()
