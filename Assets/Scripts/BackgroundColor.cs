@@ -21,7 +21,7 @@ public class BackgroundColor : MonoBehaviour
     {
         try
         {
-            string bgColorHtml = state["scene"]["backgroundColor"].ToString();
+            string bgColorHtml = state["scene"]?["backgroundColor"]?.ToString();
             Color bgColor = picker.Color;
             if (bgColorHtml != null)
             {

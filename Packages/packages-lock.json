@@ -90,11 +90,11 @@
       }
     },
     "edu.umn.cs.ivlab.abrengine": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#5ecf11da4d16f1af30e0aad90299efa42d91b279",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#f88945f6a7521bcf7483554dc97ca5488de810b7",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5ecf11da4d16f1af30e0aad90299efa42d91b279"
+      "hash": "f88945f6a7521bcf7483554dc97ca5488de810b7"
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
@@ -115,11 +115,11 @@
       "hash": "2e9bfa529536cede118eb0f4c4f7afc25c39684f"
     },
     "edu.umn.cs.ivlab.objimport": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git#v2.0.2",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "9762e403a6875612dd5122cd71636818c943626e"
+      "hash": "25e3cc4f5faf143d622945f58634aedeae650c36"
     },
     "edu.umn.cs.ivlab.utilities": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#66d99e7cd811c67f68677c6da84c55c179a14b25",
