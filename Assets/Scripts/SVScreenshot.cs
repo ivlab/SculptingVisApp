@@ -36,7 +36,7 @@ public class SVScreenshot : MonoBehaviour
     {
         var homevar = "";
         if (System.Environment.OSVersion.Platform == System.PlatformID.Win32NT)
-            homevar = "HOMEPATH";
+            homevar = "USERPROFILE";
         else
             homevar = "HOME";
         var home = System.Environment.GetEnvironmentVariable(homevar);
