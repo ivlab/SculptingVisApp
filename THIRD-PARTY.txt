@@ -1,0 +1,2 @@
+This software contains third party software from numerous sources. See
+third party notices for dependencies in Packages/manifest.json.
