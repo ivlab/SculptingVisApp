@@ -21,11 +21,11 @@ public class PerformanceEnhancer : MonoBehaviour
     // Target frame rate for the app
     [SerializeField] private int targetFrameRate = 60;
 
-    // Frames since speedy render called
-    private int framesSinceSpeedup = 0;
+    // Time since speedy render called
+    private float timeSinceSpeedup = 0;
 
-    // Frames to wait before slowing down again
-    private int framesToBeFast = 10;
+    // Time to wait before slowing down again
+    private float timeToBeFast = 10.0f / 60.0f;  // 10 frames at 60 fps
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +40,13 @@ public class PerformanceEnhancer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (framesSinceSpeedup > framesToBeFast)
+        if (timeSinceSpeedup > timeToBeFast)
         {
             OnDemandRendering.renderFrameInterval = slowFrameInterval;
         }
         else
         {
-            framesSinceSpeedup += 1;
+            timeSinceSpeedup += Time.deltaTime;
         }
 
         if (Input.anyKey)
@@ -63,6 +63,14 @@ public class PerformanceEnhancer : MonoBehaviour
     void SpeedUp()
     {
         OnDemandRendering.renderFrameInterval = fastFrameInterval;
-        framesSinceSpeedup = 0;
+        // Only ever increase the length of time that rendering is sped up for
+        if (timeSinceSpeedup > 0) timeSinceSpeedup = 0;
+    }
+
+    public void SpeedUpForSeconds(float speedUpTime)
+    {
+        OnDemandRendering.renderFrameInterval = fastFrameInterval;
+        // Only ever increase the length of time that rendering is sped up for
+        if (timeToBeFast - timeSinceSpeedup < speedUpTime) timeSinceSpeedup = timeToBeFast - speedUpTime;
     }
 }
