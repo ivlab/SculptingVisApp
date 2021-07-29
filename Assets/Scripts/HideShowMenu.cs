@@ -51,7 +51,7 @@ public class HideShowMenu : MonoBehaviour
     {
         float t = Time.deltaTime * speed;
         float animationTime = 1.0f;
-        performanceEnhancer.SpeedUpForSeconds(animationTime);
+        performanceEnhancer.SpeedUpForSeconds(animationTime / speed);
         while (t < animationTime)
         {
             rightArrow.transform.localRotation = Quaternion.Lerp(rightArrow.transform.localRotation, Quaternion.Euler(0, 0, 180 + arrowFudge), t * t);
@@ -72,7 +72,7 @@ public class HideShowMenu : MonoBehaviour
     {
         float t = Time.deltaTime * speed;
         float animationTime = 1.0f;
-        performanceEnhancer.SpeedUpForSeconds(animationTime);
+        performanceEnhancer.SpeedUpForSeconds(animationTime / speed);
         while (t < animationTime)
         {
             rightArrow.transform.localRotation = Quaternion.Lerp(rightArrow.transform.localRotation, Quaternion.Euler(0, 0, 0), t * t);
