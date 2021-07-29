@@ -2395,6 +2395,7 @@ MonoBehaviour:
   speed: 1
   rightArrow: {fileID: 737041084}
   leftArrow: {fileID: 1840701888}
+  performanceEnhancer: {fileID: 1029277599}
 --- !u!1 &770729572
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,6 +3480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c68772fa48249d0937fecd1b38ee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowFrameInterval: 600
+  fastFrameInterval: 1
+  targetFrameRate: 60
 --- !u!4 &1029277600
 Transform:
   m_ObjectHideFlags: 0
@@ -4477,6 +4481,7 @@ MonoBehaviour:
   speed: 1
   rightArrow: {fileID: 965118216}
   leftArrow: {fileID: 40513637}
+  performanceEnhancer: {fileID: 1029277599}
 --- !u!1 &1307988452
 GameObject:
   m_ObjectHideFlags: 0

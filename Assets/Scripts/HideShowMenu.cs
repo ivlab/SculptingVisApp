@@ -15,6 +15,8 @@ public class HideShowMenu : MonoBehaviour
     /// <summary> Arrow icons. Rotate depending on whether the menu is hidden or shown. </summary>
     [SerializeField] private GameObject rightArrow;
     [SerializeField] private GameObject leftArrow;
+    /// <summary> Reference to the performance enhancer that controls the scene's on demand rendering. </summary>
+    [SerializeField] private PerformanceEnhancer performanceEnhancer;
     /// <summary> Used to ensure the arrows rotate in opposite directions when Lerping. </summary>
     private float arrowFudge = 0.0001f;
     /// <summary> Current hidden/shown status of the menu. </summary>
@@ -48,7 +50,9 @@ public class HideShowMenu : MonoBehaviour
     private IEnumerator Hide()
     {
         float t = Time.deltaTime * speed;
-        while (t < 1.0f)
+        float animationTime = 1.0f;
+        performanceEnhancer.SpeedUpForSeconds(animationTime);
+        while (t < animationTime)
         {
             rightArrow.transform.localRotation = Quaternion.Lerp(rightArrow.transform.localRotation, Quaternion.Euler(0, 0, 180 + arrowFudge), t * t);
             leftArrow.transform.localRotation = Quaternion.Lerp(leftArrow.transform.localRotation, Quaternion.Euler(0, 0, 180 - arrowFudge), t * t);
@@ -67,7 +71,9 @@ public class HideShowMenu : MonoBehaviour
     private IEnumerator Show()
     {
         float t = Time.deltaTime * speed;
-        while (t < 1.0f)
+        float animationTime = 1.0f;
+        performanceEnhancer.SpeedUpForSeconds(animationTime);
+        while (t < animationTime)
         {
             rightArrow.transform.localRotation = Quaternion.Lerp(rightArrow.transform.localRotation, Quaternion.Euler(0, 0, 0), t * t);
             leftArrow.transform.localRotation = Quaternion.Lerp(leftArrow.transform.localRotation, Quaternion.Euler(0, 0, 0), t * t);
