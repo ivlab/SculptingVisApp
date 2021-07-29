@@ -63,14 +63,14 @@ public class PerformanceEnhancer : MonoBehaviour
     void SpeedUp()
     {
         OnDemandRendering.renderFrameInterval = fastFrameInterval;
-        // Only ever increase the time rendering is sped up for
+        // Only ever increase the length of time that rendering is sped up for
         if (timeSinceSpeedup > 0) timeSinceSpeedup = 0;
     }
 
     public void SpeedUpForSeconds(float speedUpTime)
     {
         OnDemandRendering.renderFrameInterval = fastFrameInterval;
-        // Only ever increase the time rendering is sped up for
+        // Only ever increase the length of time that rendering is sped up for
         if (timeToBeFast - timeSinceSpeedup < speedUpTime) timeSinceSpeedup = timeToBeFast - speedUpTime;
     }
 }
