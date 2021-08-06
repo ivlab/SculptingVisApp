@@ -22,13 +22,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using IVLab.Utilities;
+using TMPro;
 
 public class SVScreenshot : MonoBehaviour
 {
-    public InputField pathText;
-    public InputField nameText;
-    public InputField widthText;
-    public InputField heightText;
+    public TMP_InputField pathText;
+    public TMP_InputField nameText;
+    public TMP_InputField widthText;
+    public TMP_InputField heightText;
     public Toggle transBg;
     public Screenshot screenshotCamera;
 
