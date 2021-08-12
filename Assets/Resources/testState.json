@@ -1,0 +1,258 @@
+{
+    "version": "0.2.0",
+    "impressions": {
+        "85500f6a-fd17-4328-8c2c-5c324c8828be": {
+            "plateType": "Surfaces",
+            "uuid": "85500f6a-fd17-4328-8c2c-5c324c8828be",
+            "name": "Data Impression",
+            "inputValues": {
+                "Key Data": {
+                    "inputType": "IVLab.ABREngine.SurfaceKeyData",
+                    "parameterName": "Key Data",
+                    "inputGenre": "KeyData",
+                    "inputValue": "Test/Wavelet/KeyData/contour200"
+                },
+                "Colormap": {
+                    "inputType": "IVLab.ABREngine.ColormapVisAsset",
+                    "parameterName": "Color",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "3225d1c0-8bbc-11ea-9994-005056bae6d8"
+                },
+                "Color Variable": {
+                    "inputType": "IVLab.ABREngine.ScalarDataVariable",
+                    "parameterName": "Color",
+                    "inputGenre": "Variable",
+                    "inputValue": "Test/Wavelet/ScalarVar/XAxis"
+                }
+            }
+        }
+    },
+    "scene": {
+        "impressionGroups": {
+            "00000000-0000-0000-0000-000000000000": {
+                "impressions": [],
+                "name": "Default",
+                "uuid": "00000000-0000-0000-0000-000000000000",
+                "containerBounds": {
+                    "center": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "magnitude": 0,
+                        "sqrMagnitude": 0
+                    },
+                    "size": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 3.46410155,
+                        "sqrMagnitude": 12
+                    },
+                    "extents": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 1,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    },
+                    "min": {
+                        "x": -1,
+                        "y": -1,
+                        "z": -1,
+                        "normalized": {
+                            "x": -0.577350259,
+                            "y": -0.577350259,
+                            "z": -0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    },
+                    "max": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 1,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    }
+                },
+                "rootPosition": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "magnitude": 0,
+                    "sqrMagnitude": 0
+                },
+                "rootRotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1,
+                    "eulerAngles": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "magnitude": 0,
+                        "sqrMagnitude": 0
+                    }
+                }
+            },
+            "26743a09-7edf-40d8-9ed4-24c89cd5ad3c": {
+                "impressions": [
+                    "b0aea13a-3ee0-49bb-a098-b68dd27c84bb"
+                ],
+                "name": "Test/Box",
+                "uuid": "26743a09-7edf-40d8-9ed4-24c89cd5ad3c",
+                "containerBounds": {
+                    "center": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "magnitude": 0,
+                        "sqrMagnitude": 0
+                    },
+                    "size": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 3.46410155,
+                        "sqrMagnitude": 12
+                    },
+                    "extents": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 1,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    },
+                    "min": {
+                        "x": -1,
+                        "y": -1,
+                        "z": -1,
+                        "normalized": {
+                            "x": -0.577350259,
+                            "y": -0.577350259,
+                            "z": -0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    },
+                    "max": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 1,
+                        "normalized": {
+                            "x": 0.577350259,
+                            "y": 0.577350259,
+                            "z": 0.577350259,
+                            "magnitude": 1,
+                            "sqrMagnitude": 0.99999994
+                        },
+                        "magnitude": 1.73205078,
+                        "sqrMagnitude": 3
+                    }
+                },
+                "rootPosition": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "magnitude": 0,
+                    "sqrMagnitude": 0
+                },
+                "rootRotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1,
+                    "eulerAngles": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "magnitude": 0,
+                        "sqrMagnitude": 0
+                    }
+                }
+            }
+        },
+        "lighting": [
+            {
+                "name": "Light 1",
+                "intensity": 1,
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "magnitude": 0,
+                    "sqrMagnitude": 0
+                },
+                "rotation": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1,
+                    "eulerAngles": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "magnitude": 0,
+                        "sqrMagnitude": 0
+                    }
+                }
+            }
+        ],
+        "backgroundColor": "#393939"
+    },
+    "dataRanges": {
+        "scalarRanges": {}
+    },
+    "uiData": {
+        "compose": {
+            "impressionData": {
+                "85500f6a-fd17-4328-8c2c-5c324c8828be": {
+                    "position": {
+                        "top": 127.55000305175781,
+                        "left": 257
+                    }
+                }
+            }
+        }
+    }
+}
