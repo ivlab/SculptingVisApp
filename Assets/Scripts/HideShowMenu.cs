@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HideShowMenu : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class HideShowMenu : MonoBehaviour
     /// <summary> Current hidden/shown status of the menu. </summary>
     private bool hidden = true;
     private RectTransform rectTransform;
+
+    public UnityEvent onMenuOpened;
+    public UnityEvent onMenuClosed;
 
     void Start()
     {
@@ -63,6 +67,7 @@ public class HideShowMenu : MonoBehaviour
         rightArrow.transform.localRotation = Quaternion.Euler(0, 0, 180 + arrowFudge);
         leftArrow.transform.localRotation = Quaternion.Euler(0, 0, 180 - arrowFudge);
         rectTransform.anchoredPosition = hidePosition;
+        onMenuClosed.Invoke();
     }
 
     /// <summary>
@@ -84,5 +89,6 @@ public class HideShowMenu : MonoBehaviour
         rightArrow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         leftArrow.transform.localRotation = Quaternion.Euler(0, 0, 0);
         rectTransform.anchoredPosition = showPosition;
+        onMenuOpened.Invoke();
     }
 }

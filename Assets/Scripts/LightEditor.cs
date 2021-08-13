@@ -21,17 +21,15 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using IVLab.Utilities;
 using IVLab.ABREngine;
 using Newtonsoft.Json.Linq;
 
 public class LightEditor : MonoBehaviour
 {
-    public Light editingLight = null;
+    // Array of light editing tiles used to edit each individual light
+    [SerializeField] private LightEditorTile[] lightEditors;
 
-    private int numLights = 0;
-    bool initDefaultLightYet = false;
+    private bool initDefaultLightYet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,136 +37,90 @@ public class LightEditor : MonoBehaviour
         ABREngine.Instance.OnStateChanged += OnABRStateChanged;
     }
 
+    // Ensures the light editors are consistent with the state whenever it changes
     void OnABRStateChanged(JObject newState)
     {
+        GameObject lightParent = GameObject.Find("ABRLightParent");
         if (!initDefaultLightYet)
         {
-            GameObject lightParent = GameObject.Find("ABRLightParent");
             if (lightParent == null || lightParent.transform.childCount == 0)
             {
                 // Initialize a new light
-                NewLight(string.Format("Light {0}", numLights + 1));
+                lightEditors?[0].CreateLight();
             }
-            SaveLights();
+            else
+            {
+                UpdateEditorTiles(lightParent);
+            }
             initDefaultLightYet = true;
         }
+        else if (lightParent != null)
+        {
+            UpdateEditorTiles(lightParent);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    // Updates editor tiles to match whatever lights are currently in the scene
+    private void UpdateEditorTiles(GameObject lightParent)
     {
-        GameObject lightParent = GameObject.Find("ABRLightParent");
-
-        if (lightParent == null)
+        // Determine which lights are new and need an editor, and which
+        // already have existing editors
+        List<int> existingEditors = new List<int>();
+        List<GameObject> newLights = new List<GameObject>();
+        foreach (Transform lightTransform in lightParent.transform)
         {
-            return;
-        }
-
-        numLights = 0;
-
-        // Update light list from state
-        Dropdown lightOptions = GetComponentInChildren<Dropdown>();
-        if (lightOptions != null)
-        {
-            int selected = lightOptions.value;
-            lightOptions.ClearOptions();
-
-            List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
-            foreach (Transform light in lightParent.transform)
+            bool newLight = true;
+            string lightName = lightTransform.gameObject.name;
+            for (int i = 0; i < lightEditors.Length; i++)
             {
-                options.Add(new Dropdown.OptionData {
-                    text = light.gameObject.name,
-                });
-                numLights += 1;
+                if (lightName == lightEditors[i].lightName)
+                {
+                    existingEditors.Add(i);
+                    lightEditors[i].EnableWithLight(lightName);
+                    newLight = false;
+                    break;
+                }
             }
-            options.Reverse();
-            lightOptions.AddOptions(options);
-            lightOptions.value = selected;
+            if (newLight)
+            {
+                newLights.Add(lightTransform.gameObject);
+            }
+        }
+
+        // Generate an array of available editors
+        List<int> availableEditors = new List<int>();
+        for (int i = 0; i < lightEditors.Length; i++)
+        {
+            if (!existingEditors.Contains(i))
+            {
+                availableEditors.Add(i);
+            }
+        }
+
+        // Attach a new light to each of the available editors,
+        // disabling any editors that remain
+        for (int i = 0; i < availableEditors.Count; i++)
+        {
+            if (i < newLights.Count)
+            {
+                lightEditors[availableEditors[i]].EnableWithLight(newLights[i].name);
+            }
+            else
+            {
+                lightEditors[availableEditors[i]].Disable();
+            }
         }
     }
-
-    public void LightIntensity(float value)
+    
+    // Limits active editing to only one editor at a time
+    public void LimitEditing(LightEditorTile mainLightEditor)
     {
-        editingLight.intensity = value;
-    }
-
-    public void LightName(string name)
-    {
-        editingLight.gameObject.name = name;
-    }
-
-    public void NewLight(string name)
-    {
-        if (name.Length == 0)
+        foreach (LightEditorTile lightEditor in lightEditors)
         {
-            name = string.Format("Light {0}", numLights + 1);
+            if (lightEditor != mainLightEditor)
+            {
+                lightEditor.SaveAndClose();
+            }
         }
-
-        GameObject lightParent = GameObject.Find("ABRLightParent");
-        if (lightParent == null)
-        {
-            lightParent = new GameObject("ABRLightParent");
-            lightParent.transform.parent = GameObject.Find("ABREngine").transform;
-        }
-
-        GameObject newLight = new GameObject(name);
-        newLight.transform.parent = lightParent.transform;
-        Light l = newLight.AddComponent<Light>();
-        l.type = LightType.Directional;
-        l.shadows = LightShadows.None;
-    }
-
-    public void DeleteLight()
-    {
-        Dropdown lightOptions = GetComponentInChildren<Dropdown>();
-        GameObject light = GameObject.Find(lightOptions.captionText.text);
-        if (light == null || !light.TryGetComponent(out editingLight))
-        {
-            Debug.LogErrorFormat("No light named {0}", lightOptions.captionText.text);
-            return;
-        }
-        Destroy(GameObject.Find(lightOptions.captionText.text));
-    }
-
-    public void EditLight() {
-        Dropdown lightOptions = GetComponentInChildren<Dropdown>();
-        Text lightNameText = GetComponentsInChildren<Text>().Where((c) => c.gameObject.name == "LightNameText").First();
-        Slider intensitySlider = GetComponentInChildren<Slider>();
-
-        GameObject light = GameObject.Find(lightOptions.captionText.text);
-        if (light == null || !light.TryGetComponent(out editingLight))
-        {
-            Debug.LogErrorFormat("No light named {0}", lightOptions.captionText.text);
-            return;
-        }
-
-        lightNameText.text = editingLight.name;
-        intensitySlider.value = editingLight.intensity;
-
-        // Disable the camera control
-        ClickAndDragCamera cameraParent = GameObject.Find("Camera Parent").GetComponentInChildren<ClickAndDragCamera>();
-        cameraParent.enabled = false;
-
-        ClickAndDragRotation rot = null;
-        if (!editingLight.gameObject.TryGetComponent<ClickAndDragRotation>(out rot))
-        {
-            rot = editingLight.gameObject.AddComponent<ClickAndDragRotation>();
-        }
-    }
-
-    public void SaveLights()
-    {
-        // Re-enable the camera control
-        ClickAndDragCamera cameraParent = GameObject.Find("Camera Parent").GetComponentInChildren<ClickAndDragCamera>();
-        cameraParent.enabled = true;
-
-        // Disable the light control
-        if (editingLight != null)
-        {
-            Destroy(editingLight.GetComponent<ClickAndDragRotation>());
-            editingLight = null;
-        }
-
-        ABREngine.Instance.SaveStateAsync();
     }
 }
