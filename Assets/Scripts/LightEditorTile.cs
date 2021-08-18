@@ -155,6 +155,6 @@ public class LightEditorTile : MonoBehaviour
 
     public void SaveChanges()
     {
-        ABREngine.Instance.SaveStateAsync();
+        ABREngine.Instance.SaveStateAsync<HttpStateFileLoader>();
     }
 }
