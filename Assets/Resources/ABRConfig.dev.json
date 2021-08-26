@@ -1,0 +1,6 @@
+{
+    "serverAddress": "http://localhost:8000",
+    "statePathOnServer": "api/state",
+    "mediaPath": "C:/Users/scoot/dev/SculptingVisAppBuild/media",
+    "dataListenerPort": 1900
+}
