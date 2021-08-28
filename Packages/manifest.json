@@ -9,6 +9,8 @@
     "com.unity.timeline": "1.4.8",
     "com.unity.toolchain.linux-x86_64": "0.1.19-preview",
     "com.unity.ugui": "1.0.0",
+    "com.unity.xr.management": "4.0.7",
+    "com.unity.xr.oculus": "1.10.0",
     "edu.umn.cs.ivlab.abrengine": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#92245054759ba3c6978f9c3743e9446db55147de",
     "edu.umn.cs.ivlab.jsondiffpatch": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
     "edu.umn.cs.ivlab.newtonsoft.json.schema": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
