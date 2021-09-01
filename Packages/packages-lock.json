@@ -114,7 +114,7 @@
       }
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.8",
+      "version": "2.1.7",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -154,6 +154,16 @@
         "com.unity.ugui": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.valvesoftware.unity.openvr": {
+      "version": "file:com.valvesoftware.unity.openvr-1.1.4",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.xr.management": "3.2.13",
+        "com.unity.ugui": "1.0.0",
+        "com.unity.xr.legacyinputhelpers": "2.1.4"
+      }
     },
     "edu.umn.cs.ivlab.abrengine": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#92245054759ba3c6978f9c3743e9446db55147de",
