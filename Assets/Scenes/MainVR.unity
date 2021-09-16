@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 181849492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 561012524}
   m_RootOrder: 1
@@ -238,6 +238,7 @@ MonoBehaviour:
   scaling: 0
   rightHand: 0
   selectedMaterial: {fileID: 2100000, guid: d832e1e575af8e5458a12a78b02023ea, type: 2}
+  grabbingMaterial: {fileID: 2100000, guid: be922ef0463c8d64283b728d6feb4f13, type: 2}
   nonSelectedMaterial: {fileID: 2100000, guid: a94805723c3aeac4aafc1d20a55434f8, type: 2}
 --- !u!114 &181849498
 MonoBehaviour:
@@ -721,7 +722,7 @@ Transform:
   m_GameObject: {fileID: 2141272670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 561012524}
   m_RootOrder: 2
@@ -805,6 +806,7 @@ MonoBehaviour:
   scaling: 0
   rightHand: 1
   selectedMaterial: {fileID: 2100000, guid: d832e1e575af8e5458a12a78b02023ea, type: 2}
+  grabbingMaterial: {fileID: 2100000, guid: be922ef0463c8d64283b728d6feb4f13, type: 2}
   nonSelectedMaterial: {fileID: 2100000, guid: a94805723c3aeac4aafc1d20a55434f8, type: 2}
 --- !u!114 &2141272676
 MonoBehaviour:

@@ -26,6 +26,7 @@ public class Grabber : MonoBehaviour
 
     [SerializeField] private bool rightHand = true;
     [SerializeField] private Material selectedMaterial;
+    [SerializeField] private Material grabbingMaterial;
     [SerializeField] private Material nonSelectedMaterial;
 
     // Update is called once per frame
@@ -59,6 +60,10 @@ public class Grabber : MonoBehaviour
                 {
                     pickUp = true;
                 }
+                else if (device.TryGetFeatureValue(CommonUsages.triggerButton, out triggerValue) && triggerValue)
+                {
+                    pickUp = true;
+                }
                 else
                 {
                     drop = true;
@@ -73,6 +78,19 @@ public class Grabber : MonoBehaviour
         if (drop)
         {
             DropObject();
+        }
+
+        if (collidingObject != null && (grabbing || scaling))
+        {
+            this.GetComponent<MeshRenderer>().material = grabbingMaterial;
+        }
+        else if (collidingObject != null)
+        {
+            this.GetComponent<MeshRenderer>().material = selectedMaterial;
+        }
+        else
+        {
+            this.GetComponent<MeshRenderer>().material = nonSelectedMaterial;
         }
 
         Matrix4x4 deltaMatrix;
@@ -126,14 +144,12 @@ public class Grabber : MonoBehaviour
         if (other.GetComponent<Grabbable>() != null)
         {
             collidingObject = other.gameObject;
-            this.GetComponent<MeshRenderer>().material = selectedMaterial;
         }
     }
     void OnTriggerExit(Collider other)
     {
         DropObject();
         collidingObject = null;
-        this.GetComponent<MeshRenderer>().material = nonSelectedMaterial;
     }
 
     void PickupObject()
