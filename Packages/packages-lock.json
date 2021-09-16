@@ -198,11 +198,11 @@
       "hash": "25e3cc4f5faf143d622945f58634aedeae650c36"
     },
     "edu.umn.cs.ivlab.utilities": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#8aad1d8be0c5d6452e5b0e07743501daf555a565",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#769ccf183ff83759a8e9aea6d4f1c47cfd43783a",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8aad1d8be0c5d6452e5b0e07743501daf555a565"
+      "hash": "769ccf183ff83759a8e9aea6d4f1c47cfd43783a"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
