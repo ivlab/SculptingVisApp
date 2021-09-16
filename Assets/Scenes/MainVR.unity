@@ -233,6 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d9e92a9fb55b9458d076eb8fe7e567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherHand: {fileID: 2141272675}
+  grabbing: 0
+  scaling: 0
   rightHand: 0
   selectedMaterial: {fileID: 2100000, guid: d832e1e575af8e5458a12a78b02023ea, type: 2}
   nonSelectedMaterial: {fileID: 2100000, guid: a94805723c3aeac4aafc1d20a55434f8, type: 2}
@@ -330,6 +333,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6353673030737499026, guid: c116b7497ab8ca34c9188965d4295e27, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353673030737499026, guid: c116b7497ab8ca34c9188965d4295e27, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.047169805
       objectReference: {fileID: 0}
@@ -358,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 5227720014445609528, guid: 7065449f3d031b6fe805be247bc48142, type: 3}
       propertyPath: m_Name
       value: ABREngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227720014445609528, guid: 7065449f3d031b6fe805be247bc48142, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5227720014445609529, guid: 7065449f3d031b6fe805be247bc48142, type: 3}
       propertyPath: m_RootOrder
@@ -789,6 +800,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d9e92a9fb55b9458d076eb8fe7e567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherHand: {fileID: 181849497}
+  grabbing: 0
+  scaling: 0
   rightHand: 1
   selectedMaterial: {fileID: 2100000, guid: d832e1e575af8e5458a12a78b02023ea, type: 2}
   nonSelectedMaterial: {fileID: 2100000, guid: a94805723c3aeac4aafc1d20a55434f8, type: 2}
