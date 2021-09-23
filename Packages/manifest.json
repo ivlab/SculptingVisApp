@@ -1,12 +1,13 @@
 {
   "dependencies": {
-    "com.unity.collab-proxy": "1.5.7",
+    "com.unity.collab-proxy": "1.9.0",
     "com.unity.ide.rider": "2.0.7",
-    "com.unity.ide.visualstudio": "2.0.8",
+    "com.unity.ide.visualstudio": "2.0.11",
     "com.unity.ide.vscode": "1.2.3",
-    "com.unity.test-framework": "1.1.24",
+    "com.unity.test-framework": "1.1.29",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.4.8",
+    "com.unity.toolchain.linux-x86_64": "0.1.19-preview",
     "com.unity.ugui": "1.0.0",
     "edu.umn.cs.ivlab.abrengine": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#92245054759ba3c6978f9c3743e9446db55147de",
     "edu.umn.cs.ivlab.jsondiffpatch": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
