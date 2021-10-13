@@ -127,6 +127,7 @@ PlayerSettings:
   vulkanEnableSetSRGBWrite: 0
   vulkanEnablePreTransform: 0
   vulkanEnableLateAcquireNextImage: 0
+  vulkanEnableCommandBufferRecycling: 1
   m_SupportedAspectRatios:
     4:3: 1
     5:4: 1
@@ -134,7 +135,9 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.2.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 809447cc77ce10a4ca0278f0048d9016, type: 2}
+  - {fileID: -9221786134039551409, guid: 98a9cbfae1f1ed44899c4e5c167dab57, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
