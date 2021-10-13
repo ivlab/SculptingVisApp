@@ -5,9 +5,8 @@ This is the Unity component of the main app for SculptingVis. It includes:
 - The Artifact-Based Rendering engine
 - Interactive camera control / screenshots
 - Interactive lighting control
+- VR support via Unity XR
 
-
-There is currently NO VR support.
 
 
 ## Developer Setup
