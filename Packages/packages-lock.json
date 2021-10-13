@@ -46,6 +46,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.subsystemregistration": {
+      "version": "1.0.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.sysroot": {
       "version": "0.1.19-preview",
       "depth": 1,
@@ -114,7 +121,7 @@
       }
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.7",
+      "version": "2.1.8",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -155,22 +162,12 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.valvesoftware.unity.openvr": {
-      "version": "file:com.valvesoftware.unity.openvr-1.1.4",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.xr.management": "3.2.13",
-        "com.unity.ugui": "1.0.0",
-        "com.unity.xr.legacyinputhelpers": "2.1.4"
-      }
-    },
     "edu.umn.cs.ivlab.abrengine": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#92245054759ba3c6978f9c3743e9446db55147de",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#v0.2.1",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "92245054759ba3c6978f9c3743e9446db55147de"
+      "hash": "c87796ce957486fb59f3c462d44ac11003960226"
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
@@ -198,11 +195,11 @@
       "hash": "25e3cc4f5faf143d622945f58634aedeae650c36"
     },
     "edu.umn.cs.ivlab.utilities": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git#769ccf183ff83759a8e9aea6d4f1c47cfd43783a",
+      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "769ccf183ff83759a8e9aea6d4f1c47cfd43783a"
+      "hash": "8ec299eb7197a3db821288d34c5b7bc2d80cac22"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
