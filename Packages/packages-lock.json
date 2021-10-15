@@ -167,7 +167,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "c87796ce957486fb59f3c462d44ac11003960226"
+      "hash": "9badff7f673c256812dd74768ab3c89309bd82bb"
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
       "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
