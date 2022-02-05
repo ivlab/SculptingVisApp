@@ -175,43 +175,40 @@
       "url": "https://packages.unity.com"
     },
     "edu.umn.cs.ivlab.abrengine": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#v0.2.1",
+      "version": "file:edu.umn.cs.ivlab.abrengine-1.0.0.tgz",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "9badff7f673c256812dd74768ab3c89309bd82bb"
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      }
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
+      "version": "file:edu.umn.cs.ivlab.jsondiffpatch-2.3.0.tgz",
       "depth": 0,
-      "source": "git",
+      "source": "local-tarball",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
-      },
-      "hash": "ee92af7919578eace74838da1deaa205ae06682f"
+      }
     },
     "edu.umn.cs.ivlab.newtonsoft.json.schema": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
+      "version": "file:edu.umn.cs.ivlab.newtonsoft.json.schema-3.0.13.tgz",
       "depth": 0,
-      "source": "git",
+      "source": "local-tarball",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
-      },
-      "hash": "2e9bfa529536cede118eb0f4c4f7afc25c39684f"
+      }
     },
     "edu.umn.cs.ivlab.objimport": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git",
+      "version": "file:edu.umn.cs.ivlab.objimport-2.0.2.tgz",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "25e3cc4f5faf143d622945f58634aedeae650c36"
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "edu.umn.cs.ivlab.utilities": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git",
+      "version": "file:edu.umn.cs.ivlab.utilities-0.1.0.tgz",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "4c6bb7d03552230d6506a2e629dea175c5ec8132"
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
