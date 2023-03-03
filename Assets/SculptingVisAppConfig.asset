@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c48af8e404cbbcbda1bf7ca5735cd01, type: 3}
+  m_Name: SculptingVisAppConfig
+  m_EditorClassIdentifier: 
+  mediaPath: ../media
+  serverUrl: http://localhost:8000/api/state
+  loadStateOnStart: 
+  defaultGlyph: {fileID: 6308255946298478577, guid: 713b972cbffad19a791a2bd818008481, type: 3}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultNanColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  defaultNanTexture: {fileID: 0}
+  defaultNanLine: {fileID: 0}
+  visAssetServerUrl: 
+  dataServerUrl: 
+  dataListenerPort: 1900
+  useAutoDataContainer: 1
+  dataContainer:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 1, y: 1, z: 1}
+  overrideGroupToDataMatrices: []
