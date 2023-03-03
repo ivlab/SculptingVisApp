@@ -1,0 +1,821 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "abr_state.json",
+    "title": "ABR State",
+    "description": "A description of the ABR 'state' which is changeable by the user",
+    "type": "object",
+
+    "required": ["version"],
+
+    "properties": {
+        "version": {
+            "type": "string",
+            "description": "Version of the schema this state was created with - semantic versioning (semver.org). Update the default whenever you update this schema.",
+            "default": "0.2.0"
+        },
+
+        "name": {
+            "type": "string",
+            "description": "Name of this state (e.g. FR14-eve)",
+            "default": "Untitled"
+        },
+
+        "impressions": {
+            "type": "object",
+            "description": "The data impressions that a user has created",
+            "$comment": "Unfortunately necessary to explicitly specify a UUID here; 'format': 'uuid' doesn't work in patternProperties",
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$": {"$ref": "#/definitions/Impression"}
+            }
+        },
+
+        "scene": {
+            "type": "object",
+            "description": "Any additional info about the scene (lights, camera, transforms, etc.)",
+            "properties": {
+                "impressionGroups": {
+                    "type": "object",
+                    "description": "Data impression groups in the scene; each group can have its own transform and bounds",
+                    "$comment": "Unfortunately necessary to specify UUID regex here",
+                    "patternProperties": {
+                        "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$": { 
+                            "type": "object",
+                            "required": ["impressions", "uuid", "name", "containerBounds", "rootPosition", "rootRotation"],
+                            "properties": {
+                                "impressions": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "uuid" }
+                                },
+                                "uuid": { "type": "string", "format": "uuid" },
+                                "name": { "type": "string" },
+                                "containerBounds": { "$ref": "#/definitions/UnityObjects/Bounds" },
+                                "rootPosition": { "$ref": "#/definitions/UnityObjects/Vector3" },
+                                "rootRotation": { "$ref": "#/definitions/UnityObjects/Quaternion" }
+                            }
+                        }
+                    }
+                },
+                "lighting": {
+                    "type": "array",
+                    "maxItems": 3,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "Directional", "Point" ]
+                            },
+                            "name": { "type": "string" },
+                            "intensity": { "type": "number" },
+                            "position": { "$ref": "#/definitions/UnityObjects/Vector3" },
+                            "rotation": { "$ref": "#/definitions/UnityObjects/Quaternion" }
+                        }
+                    }
+                },
+                "backgroundColor": {
+                    "type": "string",
+                    "pattern": "^#[0-9A-Fa-f]{6}$"
+                }
+            }
+        },
+
+        "dataRanges": {
+            "type": "object",
+            "description": "Ranges for variables in the state (scalar, vector, etc.)",
+            "properties": {
+                "scalarRanges": {
+                    "type": "object",
+                    "description": "Ranges for scalar variables. This object contains the global, systemwide definitions for var ranges.",
+                    "$comment": "Must explicitly specify DataPath key here",
+                    "patternProperties": { 
+                        "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
+                            "type": "object",
+                            "description": "Systemwide definition for minimum / maximum of a variable",
+                            "required": ["min", "max"],
+                            "properties": {
+                                "min": { "type": "number" },
+                                "max": { "type": "number" }
+                            }
+                        }
+                    }
+                },
+                "specificScalarRanges": {
+                    "type": "object",
+                    "description": "Ranges for scalar variables. Custom, per-keydata ranges are specified here.",
+                    "$comment": "Must explicitly specify DataPath key here",
+                    "patternProperties": { 
+                        "^([^/]+)\/([^/]+)\/(KeyData)\/([^/]+)$": {
+                            "type": "object",
+                            "description": "Definition of minimum / maximum that applies to this key data object only",
+                            "patternProperties": {
+                                "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
+                                    "type": "object",
+                                    "required": ["min", "max"],
+                                        "min": { "type": "number" },
+                                        "max": { "type": "number" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "uiData": {
+            "type": "object",
+            "description": "Any additional info about user interfaces (artist UI, legend UI, physician UI, ...)",
+            "properties": {
+                "compose": {
+                    "type": "object",
+                    "description": "Data for the ABR Compose UI",
+                    "properties": {
+                        "impressionData": {
+                            "type": "object",
+                            "patternProperties": {
+                                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$": {
+                                    "type": "object",
+                                    "properties": {
+                                        "position": {
+                                            "type": "object",
+                                            "description": "Position of this data impression on the browser page",
+                                            "properties": {
+                                                "x": { "type": "number" },
+                                                "y": { "type": "number" }
+                                            }
+                                        },
+                                        "collapsed": {
+                                            "description": "Should the data impression be expanded or not?",
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "dataQuery": {
+                    "type": "object",
+                    "description": "Data for the data querying UI",
+                    "properties": {
+                        "mode": {
+                            "type": "string",
+                            "enum": ["Slices", "Streams"],
+                            "default": "Slices"
+                        },
+                        "timestep": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+
+        "localVisAssets": {
+            "type": "object",
+            "description": "VisAssets that are specific to this state",
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/LocalVisAsset"}
+            }
+        },
+
+        "visAssetGradients": {
+            "type": "object",
+            "description": "Gradients of VisAssets that are stored in the state",
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/VisAssetGradient"}
+            }
+        },
+
+        "primitiveGradients": {
+            "type": "object",
+            "description": "Gradients of Primitives (simple numeric values)",
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/PrimitiveGradient"}
+            }
+        }
+    },
+
+    "definitions": {
+        "Impression": {
+            "type": "object",
+            "description": "A single data impression (ABR layer) - instantiated version of a plate",
+            "required": ["plateType", "uuid"],
+            "properties": {
+                "plateType": {
+                    "type": "string",
+                    "description": "What type of data impression is it? (one of the plate types specified in the spec)",
+                    "$comment": "Change this when adding a new plate type",
+                    "enum": ["Glyphs", "Ribbons", "Surfaces", "Volumes"]
+                },
+                "uuid": {
+                    "format": "uuid",
+                    "description": "The unique identifier for this data impression"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "User-defined name of the data impression (i.e. 'blue ocean')",
+                    "default": "Data Impression"
+                },
+                "renderHints": {
+                    "type": "object",
+                    "description": "Additional data that can/should be used when rendering, such as visibility of the impression",
+                    "properties": {
+                        "DataChanged": {
+                            "type": "boolean"
+                        },
+                        "StyleChanged": {
+                            "type": "boolean"
+                        },
+                        "VisibilityChanged": {
+                            "type": "boolean"
+                        },
+                        "Visible": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "inputValues": {
+                    "type": "object",
+                    "description": "Input values for this data impression (i.e. Key Data, Colormap, Color Variable, etc.)",
+                    "patternProperties": {
+                        ".*": { "$ref": "#/definitions/InputValue"}
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Glyphs" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Glyphs" } }
+                    }
+                },
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Ribbons" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Ribbons" } }
+                    }
+                },
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Surfaces" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Surfaces" } }
+                    }
+                },
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Volumes" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Volumes" } }
+                    }
+                }
+            ]
+        },
+
+        "InputValue": {
+            "type": "object",
+            "description": "A single input value for a data impression",
+            "required": ["inputValue", "inputType", "parameterName", "inputGenre"],
+            "properties": {
+                "inputType": {
+                    "type": "string",
+                    "description": "The type of this input (corresponds to a C# type in ABR)"
+                },
+                "inputValue": {
+                    "type": "string",
+                    "description": "Null, UUID, primitive, or resolvable path where the input can be found. Should be a string.",
+                    "default": "null"
+                },
+                "parameterName": {
+                    "type": "string",
+                    "description": "Which visual parameter is being affected by this input (e.g. `Colormap` and `Color Variable` both affect the `Color` parameter)"
+                },
+                "inputGenre": {
+                    "type": "string",
+                    "description": "Which genre of input (e.g. `Variable`, `VisAsset`, or `Primitive`)",
+                    "enum": ["KeyData", "Variable", "VisAsset", "Primitive", "PrimitiveGradient"]
+                }
+            },
+            "additionalProperties": false
+        },
+
+        "LocalVisAsset": {
+            "type": "object",
+            "description": "A vis asset stored locally in this state (one that has been modified by the user in ABR)",
+            "required": ["artifactJson"],
+            "properties": {
+                "artifactJson": {
+                    "$comment": "The json contents of the artifact.json file, with a schema referred to by 'visasset.json' in this folder"
+                },
+                "artifactDataContents": {
+                    "$comment": "Contents of the files listed in artifactJson/artifactData/*, represented in plaintext or base64 encoding. Keys are the filename, values are the string or b64 bytes.",
+                    "type": "object"
+                }
+            }
+        },
+
+        "VisAssetGradient": {
+            "type": "object",
+            "description": "A gradient of VisAssets",
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "gradientScale": {
+                    "type": "string",
+                    "description": "Is it a continuous or discrete gradient?",
+                    "enum": ["continuous", "discrete"]
+                },
+                "gradientType": {
+                    "$ref": "#/definitions/VisAssetType",
+                    "description": "What are the elements of this gradient? (colormap, glyphs, ...)"
+                },
+                "points": {
+                    "type": "array",
+                    "description": "The floating point 'stops' in the gradient. Must be length of `visAssets` - 1",
+                    "items": { "type": "number" }
+                },
+                "visAssets": {
+                    "type": "array",
+                    "description": "The UUIDs of the VisAssets in the gradient. Must be length of `points` + 1",
+                    "items": { "format": "uuid" }
+                }
+            }
+        },
+
+        "PrimitiveGradient": {
+            "type": "object",
+            "description": "Generic numeric map to be used by styling inputs like opacity, variable glyph size, etc.",
+            "properties": {
+                "points": {
+                    "type": "array",
+                    "description": "Control points (percentages 0.0-1.0)",
+                    "items": { "type": "number" }
+                },
+                "values": {
+                    "type": "array",
+                    "description": "Primitive values at a particular point",
+                    "items": {
+                        "oneOf": [
+                            { "$ref": "#/definitions/InputStringTypes/FloatPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/BooleanPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/LengthPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/AnglePrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" }
+                        ]
+                    }
+                }
+            }
+        },
+
+        "VisAssetType": {
+            "type": "string",
+            "enum": ["colormap", "glyph", "line", "texture"]
+        },
+
+        "InputStringTypes": {
+            "Null": {
+                "type": "string",
+                "pattern": "^null$"
+            },
+
+            "UUID": {
+                "type": "string",
+                "pattern": "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$"
+            },
+
+            "DataPath": {
+                "type": "string",
+                "$comment": "Update whenever a new data source is added to the data server. Eventually should pull this bit of schema from the data server.",
+                "pattern": "^([^/]+)\/([^/]+)\/(KeyData|ScalarVar|VectorVar)\/([^/]+)$"
+            },
+
+            "FloatPrimitive": {
+                "type": "string",
+                "description": "Floating point number",
+                "pattern": "^-?\\d+(.\\d+)?$"
+            },
+            "PercentPrimitive": {
+                "type": "string",
+                "description": "Floating point percentage",
+                "pattern": "^-?\\d+(.\\d+)?(%)$"
+            },
+            "LengthPrimitive": {
+                "type": "string",
+                "description": "Floating point distance (metric units)",
+                "pattern": "^-?\\d+(.\\d+)?(m)$"
+            },
+            "BooleanPrimitive": {
+                "type": "string",
+                "description": "Boolean",
+                "pattern": "^(true)|(false)$"
+            },
+            "AnglePrimitive": {
+                "type": "string",
+                "description": "Angle measure in degrees",
+                "pattern": "^-?\\d+(.\\d+)?(deg)$"
+            },
+            "IntegerPrimitive": {
+                "type": "string",
+                "description": "Whole number",
+                "pattern": "^-?\\d+$"
+            }
+        },
+
+        "UnityObjects": {
+            "Vector3": {
+                "type": "object",
+                "required": ["x", "y", "z"],
+                "properties": {
+                    "x": { "type": "number" },
+                    "y": { "type": "number" },
+                    "z": { "type": "number" }
+                }
+            },
+            "Quaternion": {
+                "type": "object",
+                "required": ["x", "y", "z", "w"],
+                "properties": {
+                    "x": { "type": "number" },
+                    "y": { "type": "number" },
+                    "z": { "type": "number" },
+                    "w": { "type": "number" }
+                }
+            },
+            "Bounds": {
+                "type": "object",
+                "required": ["center", "extents"],
+                "properties": {
+                    "center": { "$ref": "#/definitions/UnityObjects/Vector3" },
+                    "extents": { "$ref": "#/definitions/UnityObjects/Vector3" }
+                }
+            }
+        },
+
+        "Plates": {
+            "Glyphs": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "type": "object",
+                "description": "Inputs for a field of glyphs",
+                "properties": {
+                    "Key Data": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PointKeyData" },
+                                "parameterName": { "const": "Key Data" },
+                                "inputGenre": { "const": "KeyData" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "VisAsset" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Glyph Variable": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Glyph" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Glyph": {
+                        "properties": {
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.GlyphVisAsset" },
+                                    { "const": "IVLab.ABREngine.GlyphGradient" }
+                                ]
+                            },
+                            "parameterName": { "const": "Glyph" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Forward Variable": {
+                        "description": "Variable to point glyph 'forward' direction along",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VectorDataVariable" },
+                                "parameterName": { "const": "Direction" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Up Variable": {
+                        "description": "Variable to point glyph 'up' direction along",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VectorDataVariable" },
+                                "parameterName": { "const": "Direction" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Glyph Size": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.LengthPrimitive" },
+                                "parameterName": { "const": "Glyph" },
+                                "inputGenre": { "const": "Primitive" },
+                                "inputValue": { "default": "0.05m", "$ref": "#/definitions/InputStringTypes/LengthPrimitive" }
+                        }
+                    },
+                    "Glyph Density": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Glyph" },
+                                "inputGenre": { "const": "Primitive" },
+                                "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Ribbons": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "properties": {
+                    "Key Data": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.LineKeyData" },
+                            "parameterName": { "const": "Key Data"},
+                            "inputGenre": { "const": "KeyData" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "Variable" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Texture Variable": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                            "parameterName": { "const": "Texture" },
+                            "inputGenre": { "const": "Variable" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Texture": {
+                        "properties": {
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.LineTextureVisAsset" },
+                                    { "const": "IVLab.ABREngine.LineTextureGradient" }
+                                ]
+                            },
+                            "parameterName": { "const": "Texture" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Texture Cutoff": {
+                        "description": "How much of the light part of the line to fill. 0% is black - no fill; 100% is white - fill everything.",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                            "parameterName": { "const": "Texture" },
+                            "inputValue": { "default": "50%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Ribbon Width": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.LengthPrimitive" },
+                            "parameterName": { "const": "Ribbon" },
+                            "inputValue": { "default": "0.01m", "$ref": "#/definitions/InputStringTypes/LengthPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Ribbon Rotation": {
+                        "description": "How should the ribbons be rotated along their central axis? (degrees)",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.AnglePrimitive" },
+                            "parameterName": { "const": "Ribbon" },
+                            "inputValue": { "default": "0deg", "$ref": "#/definitions/InputStringTypes/AnglePrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Ribbon Curve": {
+                        "description": "How much to curve the ribbons (degrees)",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.AnglePrimitive" },
+                            "parameterName": { "const": "Ribbon" },
+                            "inputValue": { "default": "0deg", "$ref": "#/definitions/InputStringTypes/AnglePrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Ribbon Brightness": {
+                        "description": "Manual brightness adjustment for the ribbons",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                            "parameterName": { "const": "Ribbon" },
+                            "inputValue": { "default": "50%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Ribbon Smooth": {
+                        "description": "How much to smooth the ribbons",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.IntegerPrimitive" },
+                            "parameterName": { "const": "Ribbon" },
+                            "inputValue": { "default": "5", "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Surfaces": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "properties": {
+                    "Key Data": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.SurfaceKeyData" },
+                            "parameterName": { "const": "Key Data" },
+                            "inputGenre": { "const": "KeyData" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "Variable" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Pattern Variable": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                            "parameterName": { "const": "Pattern" },
+                            "inputGenre": { "const": "Variable" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Pattern": {
+                        "properties": {
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.SurfaceTextureVisAsset" },
+                                    { "const": "IVLab.ABREngine.SurfaceTextureGradient" }
+                                ]
+                            },
+                            "parameterName": { "const": "Pattern" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Pattern Size": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.LengthPrimitive" },
+                            "parameterName": { "const": "Pattern" },
+                            "inputValue": { "default": "1m", "$ref": "#/definitions/InputStringTypes/LengthPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Pattern Seam Blend": {
+                        "description": "Blend the seams of the texture together (percent)",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                            "parameterName": { "const": "Pattern" },
+                            "inputValue": { 
+                                "$ref": "#/definitions/InputStringTypes/PercentPrimitive",
+                                "default": "10%"
+                            },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Pattern Saturation": {
+                        "description": "Saturation of pattern",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                            "parameterName": { "const": "Pattern" },
+                            "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Pattern Intensity": {
+                        "description": "How intense to make the pattern (0% = doesn't show up at all, 100% = only the pattern)",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                            "parameterName": { "const": "Pattern" },
+                            "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            "inputGenre": { "const": "Primitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Volumes": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "type": "object",
+                "properties": {
+                    "Key Data": {
+                        "description": "Volume data source.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VolumeKeyData" },
+                                "parameterName": { "const": "Key Data" },
+                                "inputGenre": { "const": "KeyData" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "description": "Scalar values that make up the volume.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "description": "Defines the color of the volume at control points along its scalar range.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "VisAsset" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Opacitymap": {
+                        "description": "Defines the opacity of the volume at control points along its scalar range.",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "PrimitiveGradient" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Volume Brightness": {
+                        "description": "Manual brightness adjustment for the volume",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "50%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Volume Opacity Multiplier": {
+                        "description": "How opaque the volume should appear. 0% - fully transparent; 100% - fully opaque.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Volume Lighting": {
+                        "description": "Whether or not the volume should react to lighting.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.BooleanPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "true", "$ref": "#/definitions/InputStringTypes/BooleanPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

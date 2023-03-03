@@ -185,10 +185,8 @@
       "version": "https://github.com/ivlab/JsonSchema-UnityPackage.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "2.0.0"
-      },
-      "hash": "2e9bfa529536cede118eb0f4c4f7afc25c39684f"
+      "dependencies": {},
+      "hash": "b8eba458ca447c8d36c0815c296efe75a437c0d1"
     },
     "edu.umn.cs.ivlab.objimport": {
       "version": "https://github.com/ivlab/OBJImport-UnityPackage.git",
