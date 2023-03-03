@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.collab-proxy": {
-      "version": "1.9.0",
+      "version": "2.0.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -15,16 +15,16 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "2.0.7",
+      "version": "3.0.18",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.1"
+        "com.unity.ext.nunit": "1.0.6"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.11",
+      "version": "2.0.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -33,24 +33,26 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.3",
+      "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "2.0.0",
+      "version": "3.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.subsystemregistration": {
-      "version": "1.0.6",
+      "version": "1.1.0",
       "depth": 1,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.subsystems": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.sysroot": {
@@ -70,7 +72,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.29",
+      "version": "1.1.31",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -90,7 +92,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.4.8",
+      "version": "1.6.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -121,7 +123,7 @@
       }
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.8",
+      "version": "2.1.10",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -131,7 +133,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
-      "version": "4.0.7",
+      "version": "4.2.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -153,24 +155,25 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.oculus": {
-      "version": "1.10.0",
+      "version": "3.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.management": "4.0.1",
-        "com.unity.ugui": "1.0.0"
+        "com.unity.xr.management": "4.2.0"
       },
       "url": "https://packages.unity.com"
     },
     "edu.umn.cs.ivlab.abrengine": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/ABREngine-UnityPackage.git#v0.2.1",
+      "version": "https://github.com/ivlab/ABREngine-UnityPackage.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "9badff7f673c256812dd74768ab3c89309bd82bb"
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "853a35abecddb406687a609475799bea8fbc0b91"
     },
     "edu.umn.cs.ivlab.jsondiffpatch": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonDiffPatch-UnityPackage.git",
+      "version": "https://github.com/ivlab/JsonDiffPatch-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -179,7 +182,7 @@
       "hash": "ee92af7919578eace74838da1deaa205ae06682f"
     },
     "edu.umn.cs.ivlab.newtonsoft.json.schema": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/JsonSchema-UnityPackage.git",
+      "version": "https://github.com/ivlab/JsonSchema-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -188,18 +191,18 @@
       "hash": "2e9bfa529536cede118eb0f4c4f7afc25c39684f"
     },
     "edu.umn.cs.ivlab.objimport": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/OBJImport-UnityPackage.git",
+      "version": "https://github.com/ivlab/OBJImport-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "25e3cc4f5faf143d622945f58634aedeae650c36"
     },
     "edu.umn.cs.ivlab.utilities": {
-      "version": "ssh://git@github.umn.edu/ivlab-cs/IVLab-Utilities-UnityPackage.git",
+      "version": "https://github.com/ivlab/IVLab-Utilities-UnityPackage.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8ec299eb7197a3db821288d34c5b7bc2d80cac22"
+      "hash": "2844083d3f1033c867224c3f24f3834e59195452"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

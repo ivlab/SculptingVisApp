@@ -60,7 +60,7 @@ public class BackgroundColor : MonoBehaviour
 
     public void SaveBackground()
     {
-        ABREngine.Instance.SaveStateAsync<HttpStateFileLoader>();
+        ABREngine.Instance.SaveState<HttpStateFileLoader>();
     }
 
     // Update is called once per frame
